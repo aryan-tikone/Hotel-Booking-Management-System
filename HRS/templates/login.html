@@ -1,0 +1,74 @@
+{% extends "layouts/struct.html" %}
+
+{% block content%}
+<body>
+  
+  <div id="login">
+     
+      <div class="container">
+          <div id="login-row" class="row justify-content-center align-items-center">
+              <div id="login-column" class="col-md-6">
+                  <div id="login-box" class="col-md-12">
+                    
+                      <div class="container">
+                          <h2 class="text-center">Login</h2>
+                          {% if form.non_field_errors %}
+                            <small class="text-danger">{{ form.non_field_errors.as_ul }}</small>
+                          {% endif %}
+                          <form id="login-form" method="POST" action="{% url 'login' %}">
+                              {% csrf_token %}
+                              
+                              <div class="form-group">
+                                  <label for="{{ form.username.id_for_label }}" class="text">Username:</label>
+                                  <input type="text" name="{{ form.username.name }}" class="form-control" value="{{ form.username.value }}">
+                                  <span class="text-danger">{{ form.username.errors }}</span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="{{ form.password.id_for_label }}" class="text">Password:</label>
+                                  <input type="password" name="{{ form.password.name }}" class="form-control" value="{{ form.password.value }}">
+                                  <span class="text-danger">{{ form.password.errors }}</span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="remember-me" class="text"><span>Remember me</span>
+                                      <span>
+                                          <input id="remember-me" name="remember-me" type="checkbox">
+                                      </span>
+                                  </label>
+                              </div>
+                              <div class="form-group text-center">
+                                  <button type="submit" class="btn btn-dark">Login</button>
+                                  <a href="{% url 'register' %}" class="btn btn-default">Register</a>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <style>
+    body {
+      background-image: url('/static/images/cmk.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    #login .container #login-row #login-column #login-box {
+      margin-top: 120px;
+      max-width: 600px;
+      height: 320px;
+      border: 1px solid #9C9C9C;
+      background-color: #EAEAEA;
+    }
+    #login .container #login-row #login-column #login-box #login-form {
+      padding: 20px;
+    }
+    #login .container #login-row #login-column #login-box #login-form #register-link {
+      margin-top: -85px;
+    }
+  </style>
+</body>
+  
+{% endblock %}
+
+
